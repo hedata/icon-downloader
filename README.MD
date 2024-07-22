@@ -61,7 +61,7 @@ This project provides a Python script that automates the process of downloading 
 
 ## Output
 
-The script generates two main outputs:
+The script generates three main outputs:
 
 1. Icon files:
 
@@ -70,11 +70,23 @@ The script generates two main outputs:
    - All icons are 32x32 pixels in PNG format
 
 2. Report file (`report.yml`):
+
    ```yaml
    Technology Name:
      success: true/false
      filename: technology_name_icon.png / null
    ```
+
+3. Command line summary:
+   After the script finishes, it will print a summary to the command line:
+   ```
+   Crawl Summary:
+   Total technologies crawled: [number]
+   Successful icon downloads: [number]
+   Failed icon downloads: [number]
+   Success rate: [percentage]%
+   ```
+   This summary provides a quick overview of the script's performance.
 
 ## Troubleshooting
 

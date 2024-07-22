@@ -54,6 +54,10 @@ def main():
     # Dictionary to store report data
     report = {}
 
+    # Counters for summary
+    total_technologies = len(technologies)
+    successful_downloads = 0
+
     # Download icons for each technology
     for tech_name, tech_info in technologies.items():
         success, filename = download_favicon(tech_info["url"], tech_name)
@@ -61,6 +65,8 @@ def main():
             "success": success,
             "filename": filename if success else None,
         }
+        if success:
+            successful_downloads += 1
 
     # Change back to the original directory
     os.chdir("..")
@@ -69,7 +75,15 @@ def main():
     with open("report.yml", "w") as file:
         yaml.dump(report, file, default_flow_style=False)
 
-    print("Report generated: report.yml")
+    print("\nReport generated: report.yml")
+
+    # Print summary
+    print("\nCrawl Summary:")
+    print(f"Total technologies crawled: {total_technologies}")
+    print(f"Successful icon downloads: {successful_downloads}")
+    print(f"Failed icon downloads: {total_technologies - successful_downloads}")
+    success_rate = (successful_downloads / total_technologies) * 100
+    print(f"Success rate: {success_rate:.2f}%")
 
 
 if __name__ == "__main__":
